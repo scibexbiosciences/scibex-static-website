@@ -1,0 +1,2584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SCIBEX Biosciences | Advancing Global Healthcare Through Scientific Innovation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Barlow:wght@200;300;400;500;600;700&family=Barlow+Condensed:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0A1628;
+    --navy-mid: #0D1F3C;
+    --navy-light: #142240;
+    --gold: #C9A84C;
+    --gold-light: #E8C96A;
+    --gold-pale: #F5E4B0;
+    --white: #FFFFFF;
+    --off-white: #F0EDE6;
+    --gray: #8B9BB0;
+    --gray-light: #B8C4D4;
+    --teal: #0E6E73;
+    --teal-light: #1A9EA6;
+    --accent-green: #2D6A4F;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Barlow', sans-serif;
+    background: var(--navy);
+    color: var(--white);
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* Custom Cursor */
+  .cursor {
+    width: 8px; height: 8px;
+    background: var(--gold);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 99999;
+    transition: transform 0.1s;
+  }
+  .cursor-ring {
+    width: 36px; height: 36px;
+    border: 1px solid rgba(201,168,76,0.5);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 99998;
+    transition: all 0.15s ease;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    padding: 0 60px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: all 0.4s ease;
+    border-bottom: 1px solid transparent;
+  }
+  nav.scrolled {
+    background: rgba(10,22,40,0.95);
+    backdrop-filter: blur(20px);
+    border-bottom-color: rgba(201,168,76,0.15);
+  }
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    text-decoration: none;
+  }
+  .nav-logo-icon {
+    width: 44px; height: 44px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .nav-logo-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1;
+  }
+  .nav-logo-text span:first-child {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    color: var(--white);
+    letter-spacing: 2px;
+  }
+  .nav-logo-text span:last-child {
+    font-size: 9px;
+    color: var(--gold);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .nav-links {
+    display: flex;
+    gap: 40px;
+    list-style: none;
+  }
+  .nav-links a {
+    text-decoration: none;
+    color: var(--gray-light);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: color 0.3s;
+    position: relative;
+  }
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0; right: 100%;
+    height: 1px;
+    background: var(--gold);
+    transition: right 0.3s ease;
+  }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-links a:hover::after { right: 0; }
+  .nav-cta {
+    background: transparent;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    padding: 10px 28px;
+    font-family: 'Barlow', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: none;
+    transition: all 0.3s;
+    text-decoration: none;
+  }
+  .nav-cta:hover {
+    background: var(--gold);
+    color: var(--navy);
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    position: relative;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 70% 40%, rgba(14,110,115,0.15) 0%, transparent 60%),
+                radial-gradient(ellipse 50% 50% at 20% 80%, rgba(201,168,76,0.06) 0%, transparent 50%),
+                linear-gradient(135deg, #050D1A 0%, #0A1628 50%, #0D1F3C 100%);
+  }
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(201,168,76,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(201,168,76,0.04) 1px, transparent 1px);
+    background-size: 80px 80px;
+    animation: gridMove 20s linear infinite;
+  }
+  @keyframes gridMove {
+    0% { transform: translate(0,0); }
+    100% { transform: translate(80px, 80px); }
+  }
+  .hero-particles {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+  }
+  .particle {
+    position: absolute;
+    width: 2px; height: 2px;
+    background: var(--gold);
+    border-radius: 50%;
+    animation: float linear infinite;
+    opacity: 0;
+  }
+  @keyframes float {
+    0% { transform: translateY(100vh) translateX(0); opacity: 0; }
+    10% { opacity: 0.6; }
+    90% { opacity: 0.3; }
+    100% { transform: translateY(-100px) translateX(60px); opacity: 0; }
+  }
+  .hero-content {
+    position: relative;
+    z-index: 10;
+    padding: 0 60px;
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+    padding-top: 80px;
+  }
+  .hero-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 32px;
+    animation: fadeUp 0.8s ease 0.2s both;
+  }
+  .hero-eyebrow-line {
+    width: 48px; height: 1px;
+    background: var(--gold);
+  }
+  .hero-eyebrow span {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(52px, 7vw, 96px);
+    font-weight: 300;
+    line-height: 1.0;
+    letter-spacing: -1px;
+    margin-bottom: 16px;
+    animation: fadeUp 0.8s ease 0.4s both;
+  }
+  .hero-title em {
+    font-style: italic;
+    color: var(--gold);
+  }
+  .hero-title-bold {
+    font-weight: 600;
+    display: block;
+  }
+  .hero-subtitle {
+    font-size: 16px;
+    font-weight: 300;
+    color: var(--gray-light);
+    max-width: 560px;
+    line-height: 1.7;
+    margin-bottom: 48px;
+    animation: fadeUp 0.8s ease 0.6s both;
+  }
+  .hero-actions {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    animation: fadeUp 0.8s ease 0.8s both;
+    flex-wrap: wrap;
+  }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    color: var(--navy);
+    padding: 16px 40px;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.3s;
+    cursor: none;
+    clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+  }
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 20px 40px rgba(201,168,76,0.3);
+  }
+  .btn-secondary {
+    color: var(--white);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s;
+    cursor: none;
+  }
+  .btn-secondary::after {
+    content: '→';
+    font-size: 16px;
+    transition: transform 0.3s;
+  }
+  .btn-secondary:hover { color: var(--gold); }
+  .btn-secondary:hover::after { transform: translateX(6px); }
+
+  .hero-stats {
+    position: absolute;
+    right: 60px;
+    bottom: 80px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    animation: fadeIn 1s ease 1.2s both;
+  }
+  .hero-stat {
+    text-align: right;
+    position: relative;
+  }
+  .hero-stat::before {
+    content: '';
+    position: absolute;
+    right: -20px;
+    top: 50%; transform: translateY(-50%);
+    width: 3px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+  }
+  .hero-stat-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 42px;
+    font-weight: 600;
+    color: var(--gold-light);
+    line-height: 1;
+  }
+  .hero-stat-label {
+    font-size: 10px;
+    color: var(--gray);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-top: 4px;
+  }
+
+  /* Scroll indicator */
+  .scroll-indicator {
+    position: absolute;
+    bottom: 40px;
+    left: 60px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    animation: fadeIn 1s ease 1.5s both;
+  }
+  .scroll-line {
+    width: 40px;
+    height: 1px;
+    background: var(--gold);
+    position: relative;
+    overflow: hidden;
+  }
+  .scroll-line::after {
+    content: '';
+    position: absolute;
+    left: -100%;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--white);
+    animation: scrollLine 2s ease infinite;
+  }
+  @keyframes scrollLine {
+    0% { left: -100%; }
+    100% { left: 100%; }
+  }
+  .scroll-text {
+    font-size: 10px;
+    color: var(--gray);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  /* SECTION COMMONS */
+  section { position: relative; }
+  .section-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 120px 60px;
+  }
+  .section-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+  .section-eyebrow-line {
+    width: 32px; height: 1px;
+    background: var(--gold);
+  }
+  .section-eyebrow span {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(36px, 4vw, 60px);
+    font-weight: 400;
+    line-height: 1.1;
+  }
+  .section-title em { font-style: italic; color: var(--gold); }
+  .section-desc {
+    color: var(--gray-light);
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 1.7;
+    max-width: 600px;
+  }
+
+  /* TICKER */
+  .ticker-wrap {
+    background: var(--navy-light);
+    border-top: 1px solid rgba(201,168,76,0.15);
+    border-bottom: 1px solid rgba(201,168,76,0.15);
+    overflow: hidden;
+    padding: 14px 0;
+  }
+  .ticker-inner {
+    display: flex;
+    gap: 0;
+    animation: ticker 30s linear infinite;
+    white-space: nowrap;
+  }
+  .ticker-item {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding-right: 60px;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gray);
+  }
+  .ticker-item span { color: var(--gold); font-weight: 600; }
+  .ticker-dot {
+    width: 4px; height: 4px;
+    border-radius: 50%;
+    background: var(--gold);
+    opacity: 0.4;
+  }
+  @keyframes ticker {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* ABOUT */
+  .about-section { background: var(--navy); }
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+  .about-visual {
+    position: relative;
+    height: 560px;
+  }
+  .about-card-main {
+    position: absolute;
+    left: 0; top: 0;
+    width: 78%;
+    height: 78%;
+    background: linear-gradient(135deg, var(--navy-light), #0E2244);
+    border: 1px solid rgba(201,168,76,0.15);
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .about-card-main::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--gold), transparent);
+  }
+  .about-card-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    margin-top: 32px;
+  }
+  .about-stat-item {}
+  .about-stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 48px;
+    font-weight: 600;
+    color: var(--gold-light);
+    line-height: 1;
+  }
+  .about-stat-label {
+    font-size: 11px;
+    color: var(--gray);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+  .about-card-secondary {
+    position: absolute;
+    right: 0; bottom: 0;
+    width: 60%;
+    background: linear-gradient(135deg, var(--teal), var(--teal-light));
+    padding: 36px;
+    clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);
+  }
+  .about-card-secondary h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 500;
+    margin-bottom: 12px;
+  }
+  .about-card-secondary p {
+    font-size: 13px;
+    font-weight: 300;
+    line-height: 1.6;
+    color: rgba(255,255,255,0.85);
+  }
+  .about-text {}
+  .mission-vision {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 48px;
+  }
+  .mv-card {
+    padding: 32px;
+    border: 1px solid rgba(201,168,76,0.12);
+    position: relative;
+    transition: all 0.4s;
+  }
+  .mv-card::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: var(--gold);
+    transform: scaleY(0);
+    transition: transform 0.4s;
+  }
+  .mv-card:hover { border-color: rgba(201,168,76,0.3); background: rgba(201,168,76,0.03); }
+  .mv-card:hover::before { transform: scaleY(1); }
+  .mv-card-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+  .mv-card p {
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--gray-light);
+    font-weight: 300;
+  }
+
+  /* SNAPSHOT TABLE */
+  .snapshot-section {
+    background: linear-gradient(180deg, var(--navy-mid) 0%, var(--navy) 100%);
+  }
+  .snapshot-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 80px;
+    align-items: start;
+  }
+  .snapshot-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .snapshot-table tr {
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    transition: background 0.2s;
+  }
+  .snapshot-table tr:hover { background: rgba(201,168,76,0.03); }
+  .snapshot-table td {
+    padding: 16px 0;
+    font-size: 13px;
+  }
+  .snapshot-table td:first-child {
+    color: var(--gray);
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-size: 11px;
+    width: 40%;
+  }
+  .snapshot-table td:last-child { color: var(--white); font-weight: 300; }
+
+  /* R&D PLATFORMS */
+  .rd-section {
+    background: var(--navy);
+    overflow: hidden;
+  }
+  .rd-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 72px;
+  }
+  .rd-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: rgba(201,168,76,0.08);
+  }
+  .rd-card {
+    background: var(--navy);
+    padding: 48px 40px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s;
+  }
+  .rd-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(14,110,115,0.1), transparent);
+    opacity: 0;
+    transition: opacity 0.4s;
+  }
+  .rd-card:hover::before { opacity: 1; }
+  .rd-card-num {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 72px;
+    font-weight: 700;
+    color: rgba(201,168,76,0.06);
+    line-height: 1;
+    position: absolute;
+    top: 24px; right: 32px;
+  }
+  .rd-card-icon {
+    width: 48px; height: 48px;
+    border: 1px solid rgba(201,168,76,0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 28px;
+    font-size: 22px;
+    transition: all 0.4s;
+  }
+  .rd-card:hover .rd-card-icon {
+    border-color: var(--gold);
+    background: rgba(201,168,76,0.1);
+  }
+  .rd-card h3 {
+    font-size: 17px;
+    font-weight: 600;
+    margin-bottom: 14px;
+    letter-spacing: 0.3px;
+  }
+  .rd-card p {
+    font-size: 13px;
+    color: var(--gray-light);
+    line-height: 1.7;
+    font-weight: 300;
+    margin-bottom: 20px;
+  }
+  .rd-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .rd-tag {
+    font-size: 10px;
+    color: var(--gold);
+    border: 1px solid rgba(201,168,76,0.2);
+    padding: 4px 10px;
+    letter-spacing: 1px;
+    font-weight: 500;
+  }
+
+  /* THERAPEUTIC */
+  .therapeutic-section {
+    background: var(--navy-mid);
+    overflow: hidden;
+  }
+  .therapeutic-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+    margin-top: 64px;
+  }
+  .th-card {
+    padding: 28px 20px;
+    border: 1px solid rgba(255,255,255,0.06);
+    position: relative;
+    transition: all 0.4s;
+    cursor: default;
+    overflow: hidden;
+  }
+  .th-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--gold);
+    transform: scaleX(0);
+    transition: transform 0.4s;
+    transform-origin: left;
+  }
+  .th-card:hover {
+    border-color: rgba(201,168,76,0.25);
+    background: rgba(201,168,76,0.04);
+    transform: translateY(-4px);
+  }
+  .th-card:hover::after { transform: scaleX(1); }
+  .th-priority {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    padding: 3px 8px;
+    display: inline-block;
+  }
+  .th-priority.very-high { background: rgba(201,168,76,0.15); color: var(--gold); }
+  .th-priority.high { background: rgba(14,110,115,0.2); color: var(--teal-light); }
+  .th-priority.growing { background: rgba(45,106,79,0.2); color: #4CAF82; }
+  .th-priority.medium { background: rgba(255,255,255,0.06); color: var(--gray-light); }
+  .th-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 11px;
+    color: var(--gray);
+    margin-bottom: 6px;
+    display: block;
+  }
+  .th-name {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    letter-spacing: 0.2px;
+  }
+  .th-desc {
+    font-size: 11px;
+    color: var(--gray);
+    line-height: 1.5;
+    font-weight: 300;
+  }
+
+  /* QUALITY */
+  .quality-section { background: var(--navy); }
+  .quality-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+  .compliance-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 48px;
+  }
+  .badge {
+    padding: 10px 20px;
+    border: 1px solid rgba(201,168,76,0.3);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--gold);
+    background: rgba(201,168,76,0.05);
+    transition: all 0.3s;
+  }
+  .badge:hover { background: rgba(201,168,76,0.12); }
+  .quality-items { display: flex; flex-direction: column; gap: 20px; }
+  .quality-item {
+    display: flex;
+    gap: 24px;
+    padding: 24px;
+    border: 1px solid rgba(255,255,255,0.05);
+    transition: all 0.4s;
+  }
+  .quality-item:hover { border-color: rgba(201,168,76,0.2); background: rgba(201,168,76,0.03); }
+  .quality-item-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px;
+    font-weight: 600;
+    color: rgba(201,168,76,0.3);
+    line-height: 1;
+    flex-shrink: 0;
+    width: 40px;
+  }
+  .quality-item-content h4 {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .quality-item-content p {
+    font-size: 13px;
+    color: var(--gray-light);
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  /* GLOBAL OPS */
+  .ops-section {
+    background: var(--navy-mid);
+    overflow: hidden;
+  }
+  .ops-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin-top: 64px;
+  }
+  .ops-card {
+    padding: 48px;
+    border: 1px solid rgba(201,168,76,0.12);
+    position: relative;
+    overflow: hidden;
+  }
+  .ops-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+  }
+  .ops-card.india::before { background: linear-gradient(90deg, #FF9933, #FFFFFF, #138808); }
+  .ops-card.usa::before { background: linear-gradient(90deg, #B22234, #FFFFFF, #3C3B6E); }
+  .ops-flag {
+    font-size: 32px;
+    margin-bottom: 8px;
+  }
+  .ops-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 12px;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+  .ops-status.active { background: rgba(45,106,79,0.2); color: #4CAF82; }
+  .ops-status.progress { background: rgba(201,168,76,0.15); color: var(--gold); }
+  .ops-status::before {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+  .ops-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 500;
+    margin-bottom: 8px;
+  }
+  .ops-card .ops-subtitle {
+    font-size: 11px;
+    color: var(--gold);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-bottom: 20px;
+  }
+  .ops-card p { font-size: 13px; color: var(--gray-light); line-height: 1.7; font-weight: 300; margin-bottom: 24px; }
+  .ops-detail {
+    font-size: 12px;
+    color: var(--gray);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .ops-detail span { display: flex; align-items: center; gap: 8px; }
+  .ops-detail span::before { content: '—'; color: var(--gold); }
+  .roadmap {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-top: 64px;
+    position: relative;
+    padding: 0 40px;
+  }
+  .roadmap::before {
+    content: '';
+    position: absolute;
+    left: 40px; right: 40px;
+    top: 20px;
+    height: 1px;
+    background: rgba(201,168,76,0.2);
+  }
+  .roadmap-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    position: relative;
+    flex: 1;
+  }
+  .roadmap-dot {
+    width: 40px; height: 40px;
+    border: 2px solid rgba(201,168,76,0.3);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--gray);
+    background: var(--navy-mid);
+    position: relative;
+    z-index: 2;
+  }
+  .roadmap-dot.active {
+    border-color: var(--gold);
+    color: var(--gold);
+    background: rgba(201,168,76,0.1);
+  }
+  .roadmap-step-label { font-size: 10px; color: var(--gold); letter-spacing: 2px; text-transform: uppercase; }
+  .roadmap-step-title { font-size: 14px; font-weight: 600; text-align: center; }
+  .roadmap-step-sub { font-size: 11px; color: var(--gray); text-align: center; }
+
+  /* PIPELINE */
+  .pipeline-section { background: var(--navy); }
+  .pipeline-stages {
+    display: flex;
+    margin-top: 64px;
+    position: relative;
+    overflow-x: auto;
+  }
+  .pipeline-stage {
+    flex: 1;
+    min-width: 120px;
+    text-align: center;
+    position: relative;
+  }
+  .pipeline-stage::after {
+    content: '→';
+    position: absolute;
+    right: -10px;
+    top: 26px;
+    color: rgba(201,168,76,0.3);
+    font-size: 18px;
+  }
+  .pipeline-stage:last-child::after { display: none; }
+  .stage-dot {
+    width: 52px; height: 52px;
+    border: 2px solid rgba(201,168,76,0.3);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--gray);
+    background: var(--navy);
+    margin: 0 auto 16px;
+    transition: all 0.4s;
+    cursor: default;
+  }
+  .pipeline-stage:hover .stage-dot {
+    border-color: var(--gold);
+    color: var(--gold);
+    background: rgba(201,168,76,0.08);
+    transform: scale(1.1);
+  }
+  .stage-name {
+    font-size: 11px;
+    font-weight: 600;
+    margin-bottom: 6px;
+    letter-spacing: 0.5px;
+  }
+  .stage-duration {
+    font-size: 10px;
+    color: var(--gold);
+    font-weight: 500;
+  }
+  .priority-matrix {
+    margin-top: 64px;
+    overflow: hidden;
+  }
+  .matrix-title {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 24px;
+  }
+  .matrix-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .matrix-table th {
+    text-align: left;
+    padding: 16px 20px;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gray);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    background: rgba(255,255,255,0.02);
+  }
+  .matrix-table td {
+    padding: 16px 20px;
+    font-size: 13px;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    color: var(--gray-light);
+    font-weight: 300;
+    transition: all 0.2s;
+  }
+  .matrix-table tr:hover td { background: rgba(201,168,76,0.03); }
+  .matrix-table td:first-child { color: var(--white); font-weight: 500; }
+  .priority-badge {
+    display: inline-block;
+    padding: 3px 10px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .priority-badge.vh { background: rgba(201,168,76,0.15); color: var(--gold); }
+  .priority-badge.h { background: rgba(14,110,115,0.2); color: var(--teal-light); }
+
+  /* MARKET */
+  .market-section { background: var(--navy-mid); }
+  .market-metrics {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: rgba(201,168,76,0.08);
+    margin-top: 64px;
+    margin-bottom: 64px;
+  }
+  .market-metric {
+    background: var(--navy-mid);
+    padding: 48px 36px;
+    text-align: center;
+    transition: all 0.4s;
+  }
+  .market-metric:hover { background: rgba(201,168,76,0.04); }
+  .market-metric-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 52px;
+    font-weight: 600;
+    color: var(--gold-light);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .market-metric-label {
+    font-size: 11px;
+    color: var(--gray);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .why-scibex {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .why-item {
+    display: flex;
+    gap: 16px;
+    padding: 20px 24px;
+    border: 1px solid rgba(255,255,255,0.05);
+    transition: all 0.4s;
+  }
+  .why-item:hover {
+    border-color: rgba(201,168,76,0.2);
+    background: rgba(201,168,76,0.03);
+    transform: translateX(6px);
+  }
+  .why-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--gold);
+    margin-top: 8px;
+    flex-shrink: 0;
+  }
+  .why-text {
+    font-size: 13px;
+    color: var(--gray-light);
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  /* TRUVEDIKA */
+  .truvedika-section {
+    background: linear-gradient(135deg, #0C1F0C 0%, #0A1E0A 40%, #0A1628 100%);
+    overflow: hidden;
+    position: relative;
+  }
+  .truvedika-bg-pattern {
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(rgba(201,168,76,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+  .truvedika-inner {
+    position: relative;
+    z-index: 2;
+  }
+  .truvedika-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+    margin-bottom: 80px;
+  }
+  .truvedika-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(45,106,79,0.2);
+    border: 1px solid rgba(45,106,79,0.3);
+    padding: 8px 20px;
+    margin-bottom: 28px;
+  }
+  .truvedika-badge span {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #4CAF82;
+  }
+  .truvedika-logo-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 64px;
+    font-weight: 300;
+    color: var(--gold-light);
+    letter-spacing: 4px;
+    margin-bottom: 8px;
+    line-height: 1;
+  }
+  .truvedika-tagline {
+    font-size: 12px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: rgba(201,168,76,0.6);
+    font-weight: 500;
+    margin-bottom: 28px;
+  }
+  .truvedika-desc {
+    font-size: 15px;
+    color: var(--gray-light);
+    line-height: 1.8;
+    font-weight: 300;
+    margin-bottom: 36px;
+  }
+  .truvedika-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: linear-gradient(135deg, rgba(45,106,79,0.4), rgba(14,110,73,0.3));
+    border: 1px solid rgba(45,106,79,0.5);
+    padding: 16px 32px;
+    text-decoration: none;
+    color: var(--white);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: all 0.4s;
+    cursor: none;
+  }
+  .truvedika-link:hover {
+    background: linear-gradient(135deg, rgba(45,106,79,0.7), rgba(14,110,73,0.6));
+    transform: translateY(-2px);
+    box-shadow: 0 16px 40px rgba(45,106,79,0.3);
+  }
+  .truvedika-link-arrow { font-size: 16px; transition: transform 0.3s; }
+  .truvedika-link:hover .truvedika-link-arrow { transform: translateX(6px); }
+  .truvedika-pillars {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+  .pillar-card {
+    padding: 28px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06);
+    transition: all 0.4s;
+  }
+  .pillar-card:hover { border-color: rgba(201,168,76,0.2); background: rgba(201,168,76,0.04); }
+  .pillar-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    color: rgba(201,168,76,0.3);
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  .pillar-card h4 { font-size: 14px; font-weight: 600; margin-bottom: 8px; }
+  .pillar-card p { font-size: 12px; color: var(--gray); line-height: 1.6; font-weight: 300; }
+
+  /* TRUVEDIKA PRODUCTS */
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-top: 64px;
+  }
+  .product-card {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.06);
+    overflow: hidden;
+    transition: all 0.4s;
+    position: relative;
+  }
+  .product-card:hover {
+    border-color: rgba(201,168,76,0.3);
+    transform: translateY(-8px);
+    box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+  }
+  .product-card-img {
+    height: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 64px;
+    position: relative;
+    overflow: hidden;
+  }
+  .product-card-img::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0.6;
+  }
+  .product-card.febriva .product-card-img { background: linear-gradient(135deg, #1a2a4a, #0d1f3c); }
+  .product-card.trupra .product-card-img { background: linear-gradient(135deg, #1a3a2a, #0d2a1c); }
+  .product-card.hepra .product-card-img { background: linear-gradient(135deg, #3a2a10, #2a1a08); }
+  .product-card.respira .product-card-img { background: linear-gradient(135deg, #0a2a3a, #051a28); }
+  .product-card-body { padding: 28px; }
+  .product-coming-soon {
+    position: absolute;
+    top: 16px; right: 16px;
+    background: rgba(201,168,76,0.9);
+    color: var(--navy);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 4px 10px;
+  }
+  .product-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--gold-light);
+    margin-bottom: 4px;
+  }
+  .product-type {
+    font-size: 11px;
+    color: var(--gray);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .product-features {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .product-features li {
+    font-size: 12px;
+    color: var(--gray-light);
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+    font-weight: 300;
+  }
+  .product-features li::before {
+    content: '✦';
+    color: var(--gold);
+    font-size: 8px;
+    margin-top: 3px;
+    flex-shrink: 0;
+  }
+  .truvedika-awards {
+    display: flex;
+    gap: 20px;
+    margin-top: 64px;
+    flex-wrap: wrap;
+  }
+  .award-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 24px;
+    background: rgba(201,168,76,0.06);
+    border: 1px solid rgba(201,168,76,0.15);
+  }
+  .award-icon { font-size: 20px; }
+  .award-text { font-size: 12px; color: var(--gray-light); font-weight: 400; }
+
+  /* FINANCIALS */
+  .financial-section { background: var(--navy); }
+  .financial-disclaimer {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(201,168,76,0.08);
+    border: 1px solid rgba(201,168,76,0.2);
+    border-left: 3px solid var(--gold);
+    padding: 16px 24px;
+    margin-bottom: 48px;
+  }
+  .financial-disclaimer span {
+    font-size: 12px;
+    color: var(--gray-light);
+    font-weight: 300;
+    line-height: 1.5;
+  }
+  .financial-kpis {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: rgba(201,168,76,0.08);
+    margin-bottom: 64px;
+  }
+  .kpi-box {
+    background: var(--navy);
+    padding: 48px 32px;
+    text-align: center;
+    transition: all 0.4s;
+    position: relative;
+  }
+  .kpi-box.highlight { background: rgba(201,168,76,0.05); }
+  .kpi-box::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 20%; right: 20%;
+    height: 1px;
+    background: var(--gold);
+    transform: scaleX(0);
+    transition: transform 0.4s;
+  }
+  .kpi-box:hover::after { transform: scaleX(1); }
+  .kpi-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 48px;
+    font-weight: 600;
+    color: var(--gold-light);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .kpi-label { font-size: 11px; color: var(--gray); letter-spacing: 2px; text-transform: uppercase; }
+  .unit-economics {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: rgba(201,168,76,0.06);
+  }
+  .ue-row {
+    background: var(--navy);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 28px;
+    transition: all 0.3s;
+  }
+  .ue-row:hover { background: rgba(201,168,76,0.04); }
+  .ue-label { font-size: 12px; color: var(--gray); font-weight: 400; }
+  .ue-value { font-size: 13px; color: var(--gold-light); font-weight: 600; }
+
+  /* LEADERSHIP */
+  .leadership-section { background: var(--navy-mid); }
+  .leadership-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 64px;
+  }
+  .leader-card {
+    padding: 36px;
+    border: 1px solid rgba(255,255,255,0.06);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s;
+  }
+  .leader-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--gold), transparent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s;
+  }
+  .leader-card:hover {
+    border-color: rgba(201,168,76,0.2);
+    background: rgba(201,168,76,0.03);
+  }
+  .leader-card:hover::before { transform: scaleX(1); }
+  .leader-avatar {
+    width: 64px; height: 64px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+  }
+  .avatar-navy { background: linear-gradient(135deg, #142240, #1e3362); color: var(--gold); border: 1px solid rgba(201,168,76,0.3); }
+  .avatar-teal { background: linear-gradient(135deg, #0E4A4F, #1A7A82); color: var(--white); border: 1px solid rgba(26,154,166,0.3); }
+  .avatar-green { background: linear-gradient(135deg, #1A3A1A, #2A5A2A); color: #4CAF82; border: 1px solid rgba(76,175,130,0.3); }
+  .avatar-gold { background: linear-gradient(135deg, #3A2A08, #5A4010); color: var(--gold-light); border: 1px solid rgba(201,168,76,0.3); }
+  .leader-name { font-size: 18px; font-weight: 600; margin-bottom: 4px; }
+  .leader-title { font-size: 11px; color: var(--gold); letter-spacing: 1.5px; text-transform: uppercase; font-weight: 500; margin-bottom: 4px; }
+  .leader-company { font-size: 11px; color: var(--gray); margin-bottom: 20px; font-style: italic; }
+  .leader-bio { font-size: 13px; color: var(--gray-light); line-height: 1.7; font-weight: 300; }
+
+  /* ESG */
+  .esg-section { background: var(--navy); }
+  .esg-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 64px;
+  }
+  .esg-card {
+    padding: 36px;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.05);
+    transition: all 0.4s;
+  }
+  .esg-card:hover {
+    background: rgba(201,168,76,0.04);
+    border-color: rgba(201,168,76,0.2);
+    transform: translateY(-4px);
+  }
+  .esg-icon { font-size: 32px; margin-bottom: 20px; }
+  .esg-card h3 { font-size: 16px; font-weight: 600; margin-bottom: 12px; }
+  .esg-card p { font-size: 13px; color: var(--gray-light); line-height: 1.7; font-weight: 300; }
+
+  /* CONTACT */
+  .contact-section {
+    background: linear-gradient(135deg, #050D1A 0%, #0A1628 100%);
+    overflow: hidden;
+    position: relative;
+  }
+  .contact-bg {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 60% 60% at 80% 50%, rgba(14,110,115,0.12) 0%, transparent 60%);
+  }
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    position: relative;
+    z-index: 2;
+  }
+  .contact-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(24px, 3vw, 40px);
+    font-weight: 300;
+    line-height: 1.4;
+    font-style: italic;
+    color: var(--off-white);
+    margin-bottom: 32px;
+    border-left: 3px solid var(--gold);
+    padding-left: 32px;
+  }
+  .contact-attribution {
+    font-size: 12px;
+    color: var(--gold);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-style: normal;
+    padding-left: 32px;
+  }
+  .contact-offices { display: flex; flex-direction: column; gap: 32px; }
+  .contact-office {}
+  .contact-office-title {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .contact-office-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(201,168,76,0.15);
+  }
+  .contact-office p {
+    font-size: 13px;
+    color: var(--gray-light);
+    line-height: 1.8;
+    font-weight: 300;
+  }
+  .contact-office a {
+    color: var(--gold-light);
+    text-decoration: none;
+    font-weight: 400;
+  }
+  .contact-office a:hover { text-decoration: underline; }
+
+  /* FOOTER */
+  footer {
+    background: #050C18;
+    padding: 40px 60px;
+    border-top: 1px solid rgba(201,168,76,0.1);
+  }
+  .footer-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+  .footer-text { font-size: 12px; color: var(--gray); font-weight: 300; }
+  .footer-links { display: flex; gap: 32px; }
+  .footer-links a {
+    font-size: 11px;
+    color: var(--gray);
+    text-decoration: none;
+    letter-spacing: 1px;
+    transition: color 0.3s;
+  }
+  .footer-links a:hover { color: var(--gold); }
+  .footer-conf {
+    font-size: 11px;
+    color: rgba(201,168,76,0.4);
+    letter-spacing: 1px;
+    font-style: italic;
+  }
+
+  /* SCROLL REVEAL */
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+
+  /* HAMBURGER */
+  .nav-mobile-toggle { display: none; }
+
+  @media (max-width: 900px) {
+    nav { padding: 0 24px; }
+    .nav-links { display: none; }
+    .section-inner { padding: 80px 24px; }
+    .about-grid, .quality-grid, .ops-grid, .snapshot-grid,
+    .contact-grid, .truvedika-header { grid-template-columns: 1fr; gap: 40px; }
+    .therapeutic-grid { grid-template-columns: repeat(2, 1fr); }
+    .leadership-grid { grid-template-columns: 1fr; }
+    .products-grid { grid-template-columns: repeat(2, 1fr); }
+    .market-metrics, .financial-kpis { grid-template-columns: repeat(2, 1fr); }
+    .rd-grid { grid-template-columns: 1fr; }
+    .esg-grid { grid-template-columns: 1fr; }
+    .hero-stats { display: none; }
+    .hero-content { padding: 0 24px; padding-top: 100px; }
+    .about-visual { height: 360px; }
+    .footer-inner { flex-direction: column; text-align: center; }
+  }
+
+  /* Progress bar */
+  .progress-bar {
+    position: fixed;
+    top: 0; left: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--gold), var(--gold-light));
+    z-index: 10001;
+    transition: width 0.1s;
+  }
+
+  /* Section divider */
+  .divider {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(201,168,76,0.15), transparent);
+  }
+
+  /* Glow effects */
+  .gold-glow {
+    text-shadow: 0 0 40px rgba(201,168,76,0.3);
+  }
+</style>
+</head>
+<body>
+
+<!-- Progress Bar -->
+<div class="progress-bar" id="progressBar"></div>
+
+<!-- Custom Cursor -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">
+    <img src="data:image/png;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCAQABAADASIAAhEBAxEB/8QAHQABAAEEAwEAAAAAAAAAAAAAAAgBBgcJAgQFA//EAGQQAAEDAgMFAwQKDAgKCAUEAwABAgMEBQYHEQgSITFBE1FhInGB0hQYMkJSYnKRobEVFiMzVnWCkpSVsrM0NjdTosHC0RckQ1RVY2VzhNMmJ0RGdIWTwzVXo6TwCShk4YO04v/EABoBAQADAQEBAAAAAAAAAAAAAAACAwQFAQb/xAAwEQEAAgECBQMEAgEEAwEAAAAAAQIDBBESFCExURMyQSJCUmEzcZEFI4GhFSTR8f/aAAwDAQACEQMRAD8AmUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAoVAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAUAqAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA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AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA//2Q==" alt="SCIBEX Logo" style="height:48px;width:48px;object-fit:contain;border-radius:8px;background:white;padding:4px;">
+    <div class="nav-logo-text">
+      <span>SCIBEX</span>
+      <span>BIOSCIENCES</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#rd">R&D</a></li>
+    <li><a href="#therapeutic">Portfolio</a></li>
+    <li><a href="#operations">Operations</a></li>
+    <li><a href="#truvedika">Truvedika</a></li>
+    <li><a href="#financials">Financials</a></li>
+    <li><a href="#leadership">Leadership</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Get In Touch</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-particles" id="particles"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">
+      <div class="hero-eyebrow-line"></div>
+      <span>GIFT City, India · New Jersey, USA</span>
+    </div>
+    <h1 class="hero-title">
+      Advancing Global<br>
+      <em>Healthcare</em> Through<br>
+      <span class="hero-title-bold">Scientific Innovation</span>
+    </h1>
+    <p class="hero-subtitle">A research-driven pharmaceutical and bioscience institution headquartered at GIFT City, India — structured for global regulated markets with WHO-GMP alignment, 10+ therapeutic platforms, and the Truvedika Ayurvedic wellness division.</p>
+    <div class="hero-actions">
+      <a href="#about" class="btn-primary">Explore SCIBEX</a>
+      <a href="#truvedika" class="btn-secondary">Discover Truvedika</a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <div class="hero-stat-number gold-glow">10+</div>
+      <div class="hero-stat-label">Therapeutic Platforms</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-number gold-glow">6</div>
+      <div class="hero-stat-label">R&D Disciplines</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-number gold-glow">2</div>
+      <div class="hero-stat-label">Global Territories</div>
+    </div>
+  </div>
+  <div class="scroll-indicator">
+    <div class="scroll-line"></div>
+    <span class="scroll-text">Scroll to explore</span>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker-inner">
+    <div class="ticker-item"><span>WHO-GMP</span> Regulatory Aligned <div class="ticker-dot"></div></div>
+    <div class="ticker-item"><span>GIFT City</span> India Headquarters <div class="ticker-dot"></div></div>
+    <div class="ticker-item"><span>New Jersey</span> USA Operations <div class="ticker-dot"></div></div>
+    <div class="ticker-item"><span>Truvedika</span> Ayurvedic Division <div class="ticker-dot"></div></div>
+    <div class="ticker-item"><span>CTD/eCTD</span> Dossier Ready <div class="ticker-dot"></div></div>
+    <div class="ticker-item"><span>USFDA · EMA · CDSCO</span> Compliant <div class="ticker-dot"></div></div>
+    <div class="ticker-item"><span>$1.6T+</span> Global Pharma Market <div class="ticker-dot"></div></div>
+    <div class="ticker-item"><span>8–10%</span> India Pharma CAGR <div class="ticker-dot"></div></div>
+    <!-- Repeat for seamless loop -->
+    <div class="ticker-item"><span>WHO-GMP</span> Regulatory Aligned <div class="ticker-dot"></div></div>
+    <div class="ticker-item"><span>GIFT City</span> India Headquarters <div class="ticker-dot"></div></div>
+    <div class="ticker-item"><span>New Jersey</span> USA Operations <div class="ticker-dot"></div></div>
+    <div class="ticker-item"><span>Truvedika</span> Ayurvedic Division <div class="ticker-dot"></div></div>
+    <div class="ticker-item"><span>CTD/eCTD</span> Dossier Ready <div class="ticker-dot"></div></div>
+    <div class="ticker-item"><span>USFDA · EMA · CDSCO</span> Compliant <div class="ticker-dot"></div></div>
+    <div class="ticker-item"><span>$1.6T+</span> Global Pharma Market <div class="ticker-dot"></div></div>
+    <div class="ticker-item"><span>8–10%</span> India Pharma CAGR <div class="ticker-dot"></div></div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="about-section" id="about">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div class="about-visual reveal">
+        <div class="about-card-main">
+          <div>
+            <div class="section-eyebrow">
+              <div class="section-eyebrow-line"></div>
+              <span>Company Snapshot</span>
+            </div>
+            <h3 style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:400;margin-bottom:8px;">India-Anchored.<br><em style="font-style:italic;color:var(--gold)">Globally Structured.</em></h3>
+          </div>
+          <div class="about-card-stats">
+            <div class="about-stat-item">
+              <div class="about-stat-num">10+</div>
+              <div class="about-stat-label">Therapeutic Categories</div>
+            </div>
+            <div class="about-stat-item">
+              <div class="about-stat-num">6</div>
+              <div class="about-stat-label">R&D Platforms</div>
+            </div>
+            <div class="about-stat-item">
+              <div class="about-stat-num">2</div>
+              <div class="about-stat-label">Global Territories</div>
+            </div>
+            <div class="about-stat-item">
+              <div class="about-stat-num">4</div>
+              <div class="about-stat-label">Active SKUs</div>
+            </div>
+          </div>
+        </div>
+        <div class="about-card-secondary">
+          <h3>Institution-Built</h3>
+          <p>Long-horizon governance with regulatory infrastructure designed for multi-decade healthcare value creation across global markets.</p>
+        </div>
+      </div>
+      <div class="about-text reveal reveal-delay-2">
+        <div class="section-eyebrow">
+          <div class="section-eyebrow-line"></div>
+          <span>About SCIBEX</span>
+        </div>
+        <h2 class="section-title" style="margin-bottom:24px;">Built to Last.<br><em>Built to Lead.</em></h2>
+        <p class="section-desc" style="margin-bottom:28px;">SCIBEX BIOSCIENCES Pvt. Ltd. is a research-driven pharmaceutical and bioscience company headquartered at GIFT City, Gandhinagar, Gujarat — India's first Smart City and International Financial Services Centre.</p>
+        <p class="section-desc" style="margin-bottom:40px;">We operate at the convergence of pharmaceutical science, formulation innovation, and integrative bioscience, structured to serve global healthcare markets with precision, scientific rigour, and institutional integrity.</p>
+        <div class="mission-vision">
+          <div class="mv-card">
+            <div class="mv-card-label">Mission</div>
+            <p>To advance accessible, evidence-based pharmaceutical solutions that improve long-term population health outcomes globally.</p>
+          </div>
+          <div class="mv-card">
+            <div class="mv-card-label">Vision</div>
+            <p>To be recognized as a trusted global bioscience institution known for scientific leadership, regulatory excellence, and long-term patient value.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- COMPANY SNAPSHOT -->
+<section class="snapshot-section">
+  <div class="section-inner">
+    <div class="snapshot-grid">
+      <div class="reveal">
+        <div class="section-eyebrow">
+          <div class="section-eyebrow-line"></div>
+          <span>At a Glance</span>
+        </div>
+        <h2 class="section-title" style="margin-bottom:24px;">Company<br><em>Profile</em></h2>
+        <p class="section-desc">Founded on the principle that world-class pharmaceutical research can be anchored in India and scaled globally.</p>
+      </div>
+      <div class="reveal reveal-delay-2">
+        <table class="snapshot-table">
+          <tr><td>Legal Name</td><td>SCIBEX BIOSCIENCES Pvt. Ltd.</td></tr>
+          <tr><td>Incorporated</td><td>GIFT City, Gandhinagar, Gujarat, India</td></tr>
+          <tr><td>US Entity</td><td>SCIBEX BIOSCIENCES Inc. — New Jersey, USA</td></tr>
+          <tr><td>Chairman & MD</td><td>Harsh Shah</td></tr>
+          <tr><td>Chief Technology Officer</td><td>Purvesh Shah</td></tr>
+          <tr><td>Chief Financial Officer</td><td>Shubham Sharma</td></tr>
+          <tr><td>Co-Founder</td><td>Hemant Shah</td></tr>
+          <tr><td>Ayurvedic Division</td><td><a href="https://www.truvedika.com" target="_blank" style="color:var(--gold-light);text-decoration:none;">Truvedika — www.truvedika.com ↗</a></td></tr>
+          <tr><td>Therapeutic Focus</td><td>10 Clinical Categories</td></tr>
+          <tr><td>Regulatory Framework</td><td>CDSCO • WHO-GMP • USFDA • EMA • ICH • CTD</td></tr>
+          <tr><td>Expansion Roadmap</td><td>India → USA → SE Asia → Europe/MENA</td></tr>
+          <tr><td>Website</td><td><a href="https://www.scibexbiosciences.com" target="_blank" style="color:var(--gold-light);text-decoration:none;">www.scibexbiosciences.com ↗</a></td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- R&D -->
+<section class="rd-section" id="rd">
+  <div class="section-inner">
+    <div class="rd-header reveal">
+      <div>
+        <div class="section-eyebrow">
+          <div class="section-eyebrow-line"></div>
+          <span>Research & Innovation</span>
+        </div>
+        <h2 class="section-title">Six Integrated<br><em>R&D Platforms</em></h2>
+      </div>
+      <p style="font-size:13px;color:var(--gray);max-width:320px;line-height:1.7;text-align:right;font-weight:300;">End-to-end pharmaceutical value chain — from scientific concept to regulated global market</p>
+    </div>
+    <div class="rd-grid">
+      <div class="rd-card reveal">
+        <div class="rd-card-num">01</div>
+        <div class="rd-card-icon">⚗</div>
+        <h3>Formulation Development</h3>
+        <p>Proprietary formulation science for oral solid dosage forms, modified-release systems, and targeted drug delivery architectures.</p>
+        <div class="rd-tags">
+          <span class="rd-tag">Tablets</span><span class="rd-tag">Capsules</span><span class="rd-tag">MR Systems</span><span class="rd-tag">Pellets</span>
+        </div>
+      </div>
+      <div class="rd-card reveal reveal-delay-1">
+        <div class="rd-card-num">02</div>
+        <div class="rd-card-icon">🔬</div>
+        <h3>Analytical Sciences</h3>
+        <p>Rigorous quality control through HPLC, dissolution testing, stability protocols, and validated analytical methods ensuring full regulatory compliance.</p>
+        <div class="rd-tags">
+          <span class="rd-tag">HPLC</span><span class="rd-tag">Dissolution</span><span class="rd-tag">Stability</span>
+        </div>
+      </div>
+      <div class="rd-card reveal reveal-delay-2">
+        <div class="rd-card-num">03</div>
+        <div class="rd-card-icon">🧬</div>
+        <h3>Bioscience Integration</h3>
+        <p>Interdisciplinary science combining molecular biology, PK/PD modeling, and clinical data to build evidence-supported therapeutic portfolios.</p>
+        <div class="rd-tags">
+          <span class="rd-tag">PK/PD</span><span class="rd-tag">Bioavailability</span><span class="rd-tag">Molecular</span>
+        </div>
+      </div>
+      <div class="rd-card reveal">
+        <div class="rd-card-num">04</div>
+        <div class="rd-card-icon">📋</div>
+        <h3>Regulatory Sciences</h3>
+        <p>Dedicated regulatory affairs aligned with CDSCO, USFDA, EMA, and WHO-GMP. Complete CTD/eCTD dossier preparation and pharmacovigilance.</p>
+        <div class="rd-tags">
+          <span class="rd-tag">USFDA</span><span class="rd-tag">EMA</span><span class="rd-tag">CTD/eCTD</span><span class="rd-tag">ICH</span>
+        </div>
+      </div>
+      <div class="rd-card reveal reveal-delay-1">
+        <div class="rd-card-num">05</div>
+        <div class="rd-card-icon">🌿</div>
+        <h3>Preventive Health Technologies</h3>
+        <p>Nutraceutical science, immunomodulatory compounds, and evidence-based preventive formulations targeting chronic lifestyle and metabolic disorders.</p>
+        <div class="rd-tags">
+          <span class="rd-tag">Nutraceuticals</span><span class="rd-tag">Adaptogens</span><span class="rd-tag">Metabolic</span>
+        </div>
+      </div>
+      <div class="rd-card reveal reveal-delay-2">
+        <div class="rd-card-num">06</div>
+        <div class="rd-card-icon">♻</div>
+        <h3>Product Lifecycle Management</h3>
+        <p>Structured PLM from IND through NDA to post-marketing surveillance, ensuring regulatory compliance and commercial maximization at every stage.</p>
+        <div class="rd-tags">
+          <span class="rd-tag">IND</span><span class="rd-tag">NDA</span><span class="rd-tag">ANDA</span><span class="rd-tag">PV</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- THERAPEUTIC PORTFOLIO -->
+<section class="therapeutic-section" id="therapeutic">
+  <div class="section-inner">
+    <div class="reveal" style="margin-bottom:0;">
+      <div class="section-eyebrow">
+        <div class="section-eyebrow-line"></div>
+        <span>Therapeutic Portfolio</span>
+      </div>
+      <h2 class="section-title">10 Clinical <em>Focus Areas</em></h2>
+      <p class="section-desc" style="margin-top:16px;">Spanning chronic disease, lifestyle disorders, and evidence-based preventive healthcare — targeting the world's most significant unmet clinical needs</p>
+    </div>
+    <div class="therapeutic-grid">
+      <div class="th-card reveal">
+        <span class="th-priority very-high">Very High</span>
+        <span class="th-num">01</span>
+        <div class="th-name">Cardiovascular</div>
+        <div class="th-desc">Hypertension, dyslipidemia, heart failure, CAD</div>
+      </div>
+      <div class="th-card reveal reveal-delay-1">
+        <span class="th-priority very-high">Very High</span>
+        <span class="th-num">02</span>
+        <div class="th-name">Diabetes & Metabolic</div>
+        <div class="th-desc">T2DM, insulin resistance, obesity, MetS</div>
+      </div>
+      <div class="th-card reveal reveal-delay-2">
+        <span class="th-priority high">High</span>
+        <span class="th-num">03</span>
+        <div class="th-name">Gastrointestinal</div>
+        <div class="th-desc">IBS, GERD, peptic ulcer, IBD, hepatic support</div>
+      </div>
+      <div class="th-card reveal reveal-delay-3">
+        <span class="th-priority high">High</span>
+        <span class="th-num">04</span>
+        <div class="th-name">Respiratory</div>
+        <div class="th-desc">Asthma, COPD, bronchitis, pulmonary conditions</div>
+      </div>
+      <div class="th-card reveal reveal-delay-4">
+        <span class="th-priority high">High</span>
+        <span class="th-num">05</span>
+        <div class="th-name">Pain & Inflammation</div>
+        <div class="th-desc">Musculoskeletal, neuropathic, acute pain</div>
+      </div>
+      <div class="th-card reveal">
+        <span class="th-priority growing">Growing</span>
+        <span class="th-num">06</span>
+        <div class="th-name">Mental Wellness</div>
+        <div class="th-desc">Anxiety, depression, sleep, ADHD, cognition</div>
+      </div>
+      <div class="th-card reveal reveal-delay-1">
+        <span class="th-priority high">High</span>
+        <span class="th-num">07</span>
+        <div class="th-name">Immunity & Infection</div>
+        <div class="th-desc">Immunomodulation, autoimmune, prophylaxis</div>
+      </div>
+      <div class="th-card reveal reveal-delay-2">
+        <span class="th-priority high">High</span>
+        <span class="th-num">08</span>
+        <div class="th-name">Women's Health</div>
+        <div class="th-desc">PCOS, endometriosis, hormonal, maternal</div>
+      </div>
+      <div class="th-card reveal reveal-delay-3">
+        <span class="th-priority medium">Medium</span>
+        <span class="th-num">09</span>
+        <div class="th-name">Urology</div>
+        <div class="th-desc">BPH, UTI, renal support, chronic conditions</div>
+      </div>
+      <div class="th-card reveal reveal-delay-4">
+        <span class="th-priority medium">Medium</span>
+        <span class="th-num">10</span>
+        <div class="th-name">Dermatology</div>
+        <div class="th-desc">Acne, eczema, psoriasis, hyperpigmentation</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- QUALITY -->
+<section class="quality-section" id="quality">
+  <div class="section-inner">
+    <div class="quality-grid">
+      <div class="reveal">
+        <div class="section-eyebrow">
+          <div class="section-eyebrow-line"></div>
+          <span>Quality & Regulatory</span>
+        </div>
+        <h2 class="section-title" style="margin-bottom:24px;">Regulatory <em>Excellence</em></h2>
+        <p class="section-desc" style="margin-bottom:36px;">Full compliance with international pharmaceutical regulations — audit-ready at every stage of development and manufacturing.</p>
+        <div class="compliance-badges">
+          <div class="badge">CDSCO</div>
+          <div class="badge">WHO-GMP</div>
+          <div class="badge">USFDA</div>
+          <div class="badge">EMA</div>
+          <div class="badge">ICH</div>
+          <div class="badge">CTD/eCTD</div>
+          <div class="badge">Schedule M</div>
+        </div>
+      </div>
+      <div class="quality-items reveal reveal-delay-2">
+        <div class="quality-item">
+          <div class="quality-item-num">01</div>
+          <div class="quality-item-content">
+            <h4>GMP-Aligned Manufacturing</h4>
+            <p>Facilities designed in strict alignment with WHO-GMP and Schedule M frameworks. Full audit readiness for national and international inspections.</p>
+          </div>
+        </div>
+        <div class="quality-item">
+          <div class="quality-item-num">02</div>
+          <div class="quality-item-content">
+            <h4>Pharmacovigilance Systems</h4>
+            <p>Comprehensive post-market safety surveillance including adverse event monitoring, signal detection, ICSR reporting per ICH E2 guidelines.</p>
+          </div>
+        </div>
+        <div class="quality-item">
+          <div class="quality-item-num">03</div>
+          <div class="quality-item-content">
+            <h4>Regulatory Dossier Management</h4>
+            <p>Complete CTD/eCTD documentation for CDSCO, USFDA, and EMA submissions with structured technical writing and archival systems.</p>
+          </div>
+        </div>
+        <div class="quality-item">
+          <div class="quality-item-num">04</div>
+          <div class="quality-item-content">
+            <h4>Stability & Analytical Testing</h4>
+            <p>ICH Q1A/Q1B accelerated and real-time stability studies, validated HPLC methodologies ensuring pharmaceutical quality across shelf life.</p>
+          </div>
+        </div>
+        <div class="quality-item">
+          <div class="quality-item-num">05</div>
+          <div class="quality-item-content">
+            <h4>Change Control & CAPA</h4>
+            <p>Formal deviation management, root-cause investigation, CAPA workflows, and version-controlled SOP documentation maintaining continuous quality integrity.</p>
+          </div>
+        </div>
+        <div class="quality-item">
+          <div class="quality-item-num">06</div>
+          <div class="quality-item-content">
+            <h4>Supplier Qualification & Audit</h4>
+            <p>Systematic qualification of API, excipient, and packaging material suppliers through vendor audits, CoA review, and approved supplier listing.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- GLOBAL OPERATIONS -->
+<section class="ops-section" id="operations">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="section-eyebrow">
+        <div class="section-eyebrow-line"></div>
+        <span>Global Operations</span>
+      </div>
+      <h2 class="section-title">India-Rooted.<br><em>Globally Expanding.</em></h2>
+      <p class="section-desc" style="margin-top:16px;">Dual-territory operations platform connecting India's pharmaceutical excellence to world markets.</p>
+    </div>
+    <div class="ops-grid">
+      <div class="ops-card india reveal">
+        <div class="ops-flag">🇮🇳</div>
+        <div class="ops-status active">Active — Phase 1</div>
+        <h3>India Headquarters</h3>
+        <div class="ops-subtitle">GIFT City, Gujarat</div>
+        <p>SCIBEX BIOSCIENCES Pvt. Ltd., GIFT City (Gujarat International Finance Tec-City), Gandhinagar, Gujarat 382 355. India's premier institutional hub providing regulatory proximity, world-class infrastructure, and direct access to pharmaceutical sector leadership and capital markets.</p>
+        <div class="ops-detail">
+          <span>Phone: +91 9974062755</span>
+          <span>business@scibexbiosciences.com</span>
+          <span>www.scibexbiosciences.com</span>
+        </div>
+      </div>
+      <div class="ops-card usa reveal reveal-delay-2">
+        <div class="ops-flag">🇺🇸</div>
+        <div class="ops-status progress">In Progress — Phase 2</div>
+        <h3>USA Operations</h3>
+        <div class="ops-subtitle">New Jersey, USA</div>
+        <p>SCIBEX BIOSCIENCES Inc., New Jersey — US East Coast Pharmaceutical Corridor. Strategic gateway into the world's largest pharmaceutical market. Positioned to support Medical Affairs, USFDA regulatory submissions, licensing and partnership development.</p>
+        <div class="ops-detail">
+          <span>Phone: +1 551 256 0660</span>
+          <span>Medical Affairs</span>
+          <span>Regulatory Filings & Partnership Development</span>
+        </div>
+      </div>
+    </div>
+    <!-- Roadmap -->
+    <div class="roadmap reveal" style="margin-top:64px;">
+      <div class="roadmap-step">
+        <div class="roadmap-dot active">1</div>
+        <div class="roadmap-step-label">Active</div>
+        <div class="roadmap-step-title">India</div>
+        <div class="roadmap-step-sub">GIFT City, Gujarat</div>
+      </div>
+      <div class="roadmap-step">
+        <div class="roadmap-dot active">2</div>
+        <div class="roadmap-step-label">In Progress</div>
+        <div class="roadmap-step-title">USA</div>
+        <div class="roadmap-step-sub">New Jersey, NJ</div>
+      </div>
+      <div class="roadmap-step">
+        <div class="roadmap-dot">3</div>
+        <div class="roadmap-step-label">Pipeline 2026</div>
+        <div class="roadmap-step-title">SE Asia</div>
+        <div class="roadmap-step-sub">Strategic Licensing</div>
+      </div>
+      <div class="roadmap-step">
+        <div class="roadmap-dot">4</div>
+        <div class="roadmap-step-label">Horizon 2030</div>
+        <div class="roadmap-step-title">Europe / MENA</div>
+        <div class="roadmap-step-sub">Licensing & Partnerships</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PIPELINE -->
+<section class="pipeline-section" id="pipeline">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="section-eyebrow">
+        <div class="section-eyebrow-line"></div>
+        <span>Development Pipeline</span>
+      </div>
+      <h2 class="section-title">8-Stage Development <em>Pathway</em></h2>
+    </div>
+    <div class="pipeline-stages reveal reveal-delay-1">
+      <div class="pipeline-stage"><div class="stage-dot">1</div><div class="stage-name">Formulation Concept</div><div class="stage-duration">4–6 mo</div></div>
+      <div class="pipeline-stage"><div class="stage-dot">2</div><div class="stage-name">Pre-Formulation R&D</div><div class="stage-duration">4–6 mo</div></div>
+      <div class="pipeline-stage"><div class="stage-dot">3</div><div class="stage-name">Formulation Dev.</div><div class="stage-duration">4–6 mo</div></div>
+      <div class="pipeline-stage"><div class="stage-dot">4</div><div class="stage-name">Analytical Methods</div><div class="stage-duration">4–6 mo</div></div>
+      <div class="pipeline-stage"><div class="stage-dot">5</div><div class="stage-name">Stability Studies</div><div class="stage-duration">4–6 mo</div></div>
+      <div class="pipeline-stage"><div class="stage-dot">6</div><div class="stage-name">Dossier Prep.</div><div class="stage-duration">4–6 mo</div></div>
+      <div class="pipeline-stage"><div class="stage-dot">7</div><div class="stage-name">Regulatory Approval</div><div class="stage-duration">6–12 mo</div></div>
+      <div class="pipeline-stage"><div class="stage-dot">8</div><div class="stage-name">Commercial & PV</div><div class="stage-duration">Ongoing</div></div>
+    </div>
+    <div class="priority-matrix reveal" style="margin-top:64px;">
+      <div class="matrix-title">Therapeutic Priority Matrix</div>
+      <table class="matrix-table">
+        <thead>
+          <tr>
+            <th>Therapeutic Area</th>
+            <th>Priority</th>
+            <th>Status</th>
+            <th>Target Markets</th>
+            <th>Timeline</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Cardiovascular</td><td><span class="priority-badge vh">Very High</span></td><td>Active Development</td><td>India, USA, GCC</td><td>18–24 Months</td></tr>
+          <tr><td>Diabetes & Metabolic</td><td><span class="priority-badge vh">Very High</span></td><td>Active Development</td><td>India, USA, SE Asia</td><td>18–24 Months</td></tr>
+          <tr><td>Gastrointestinal</td><td><span class="priority-badge h">High</span></td><td>Formulation Stage</td><td>India, GCC</td><td>24–30 Months</td></tr>
+          <tr><td>Respiratory</td><td><span class="priority-badge h">High</span></td><td>Pre-Formulation</td><td>India, USA</td><td>24–36 Months</td></tr>
+          <tr><td>Women's Health</td><td><span class="priority-badge h">High</span></td><td>Active Development</td><td>India, MENA</td><td>18–24 Months</td></tr>
+          <tr><td>Mental Wellness</td><td><span class="priority-badge" style="background:rgba(45,106,79,0.2);color:#4CAF82;">Growing</span></td><td>Pipeline</td><td>USA, India</td><td>30–42 Months</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- MARKET -->
+<section class="market-section" id="market">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="section-eyebrow">
+        <div class="section-eyebrow-line"></div>
+        <span>Market Opportunity</span>
+      </div>
+      <h2 class="section-title">The Global Healthcare<br><em>Opportunity</em></h2>
+      <p class="section-desc" style="margin-top:16px;">India-based pharmaceutical companies uniquely positioned to capture global generics, specialty, and integrative wellness market growth.</p>
+    </div>
+    <div class="market-metrics">
+      <div class="market-metric reveal"><div class="market-metric-num">$1.6T+</div><div class="market-metric-label">Global Pharma Market 2025</div></div>
+      <div class="market-metric reveal reveal-delay-1"><div class="market-metric-num">$57B+</div><div class="market-metric-label">India Pharma Market 2025</div></div>
+      <div class="market-metric reveal reveal-delay-2"><div class="market-metric-num">$13B+</div><div class="market-metric-label">Global Ayurvedic Wellness</div></div>
+      <div class="market-metric reveal reveal-delay-3"><div class="market-metric-num">8–10%</div><div class="market-metric-label">India Pharma CAGR Forecast</div></div>
+    </div>
+    <div class="reveal">
+      <div style="font-size:11px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:24px;">Why SCIBEX Biosciences</div>
+      <div class="why-scibex">
+        <div class="why-item"><div class="why-dot"></div><div class="why-text">Science-first institution — WHO-GMP aligned, audit-ready manufacturing across all divisions</div></div>
+        <div class="why-item"><div class="why-dot"></div><div class="why-text">Dual jurisdiction: India GIFT City HQ + New Jersey USA operations fully established</div></div>
+        <div class="why-item"><div class="why-dot"></div><div class="why-text">10+ therapeutic areas with active formulation pipeline targeting highest-demand categories</div></div>
+        <div class="why-item"><div class="why-dot"></div><div class="why-text">Truvedika captures premium global Ayurvedic wellness demand in a $13B+ market</div></div>
+        <div class="why-item"><div class="why-dot"></div><div class="why-text">CTD/eCTD ready for USFDA, EMA, and CDSCO regulatory filings — submission-grade dossiers</div></div>
+        <div class="why-item"><div class="why-dot"></div><div class="why-text">Long-horizon governance model purpose-built for institutional capital and multi-decade value</div></div>
+        <div class="why-item"><div class="why-dot"></div><div class="why-text">GIFT City base — India's premier international financial services hub with global capital access</div></div>
+        <div class="why-item"><div class="why-dot"></div><div class="why-text">Experienced leadership across pharmaceutical science, technology, finance, and Ayurvedic medicine</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- TRUVEDIKA -->
+<section class="truvedika-section" id="truvedika">
+  <div class="truvedika-bg-pattern"></div>
+  <div class="section-inner truvedika-inner">
+    <div class="truvedika-header">
+      <div class="reveal">
+        <div class="truvedika-badge"><span>Ayurvedic Wellness Division</span></div>
+        <div class="truvedika-logo-text">TRUVEDIKA</div>
+        <div class="truvedika-tagline">Natural Ayura Company</div>
+        <p class="truvedika-desc">A division of SCIBEX BIOSCIENCES Pvt. Ltd. — derived from Sanskrit, representing Truth (Satya), Knowledge (Vidya), and Holistic Healing. Every product is grounded in classical Ayurvedic texts — Charaka Samhita, Sushruta Samhita, Ashtanga Hridayam — validated through modern analytical methodology and GMP manufacturing standards.</p>
+        <a href="https://www.truvedika.com" target="_blank" class="truvedika-link">
+          Visit Truvedika Website
+          <span class="truvedika-link-arrow">→</span>
+        </a>
+        <div class="truvedika-awards">
+          <div class="award-item"><div class="award-icon">🏆</div><div class="award-text">Best Young Startup Entrepreneur</div></div>
+          <div class="award-item"><div class="award-icon">🌟</div><div class="award-text">Excellence in Ayurvedic Innovation</div></div>
+          <div class="award-item"><div class="award-icon">🌍</div><div class="award-text">Emerging Global Healthcare Brand</div></div>
+        </div>
+      </div>
+      <div class="truvedika-pillars reveal reveal-delay-2">
+        <div class="pillar-card">
+          <div class="pillar-num">01</div>
+          <h4>Science-Backed Formulations</h4>
+          <p>Rooted in classical Ayurvedic texts validated through modern analytical and clinical methodologies. Every ingredient authenticity verified and quality tested.</p>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-num">02</div>
+          <h4>GMP Quality Manufacturing</h4>
+          <p>Manufactured under GMP-compliant conditions using sustainably sourced, authentically identified botanical raw materials with full batch traceability.</p>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-num">03</div>
+          <h4>Holistic Wellness Philosophy</h4>
+          <p>Ayurveda's tridosha principle — addressing the root cause of imbalance. Whole-person wellness for modern, high-performance lifestyles.</p>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-num">04</div>
+          <h4>Sustainability & Authenticity</h4>
+          <p>Responsibly sourced herbs with full supply chain traceability, protecting India's biodiversity and supporting local farming communities.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Products -->
+    <div class="reveal" style="margin-bottom:32px;">
+      <div class="section-eyebrow">
+        <div class="section-eyebrow-line"></div>
+        <span>Truvedika Products</span>
+      </div>
+      <h2 class="section-title">Nature's Wisdom, <em>Scientifically Proven</em></h2>
+    </div>
+    <div class="products-grid">
+      <div class="product-card febriva reveal">
+        <div class="product-card-img">🌡</div>
+        <div class="product-card-body">
+          <div class="product-name">FEBRIVA</div>
+          <div class="product-type">Ayurvedic Fever Recovery Syrup · 200ml</div>
+          <ul class="product-features">
+            <li>Thermal balance & recovery intelligence</li>
+            <li>Immunomodulatory botanical herbs</li>
+            <li>Post-fever strength restoration</li>
+            <li>Family suitable — all age groups</li>
+          </ul>
+        </div>
+      </div>
+      <div class="product-card trupra reveal reveal-delay-1">
+        <div class="product-card-img">🫘</div>
+        <div class="product-card-body">
+          <div class="product-name">TRUPRA</div>
+          <div class="product-type">Kidney & Urinary Care Formula · 200ml</div>
+          <ul class="product-features">
+            <li>Renal support & filtration function</li>
+            <li>Urinary tract health & integrity</li>
+            <li>Classical lithontriptic herbs</li>
+            <li>Safe for long-term use</li>
+          </ul>
+        </div>
+      </div>
+      <div class="product-card hepra reveal reveal-delay-2">
+        <div class="product-card-img">🫀</div>
+        <div class="product-card-body">
+          <div class="product-coming-soon">Coming Soon</div>
+          <div class="product-name">HEPRA</div>
+          <div class="product-type">Liver Health & Detox Support · 200ml</div>
+          <ul class="product-features">
+            <li>Advanced hepatoprotection formula</li>
+            <li>Liver detoxification pathways</li>
+            <li>Oxidative stress reduction</li>
+            <li>Enzyme profile normalization</li>
+          </ul>
+        </div>
+      </div>
+      <div class="product-card respira reveal reveal-delay-3">
+        <div class="product-card-img">🫁</div>
+        <div class="product-card-body">
+          <div class="product-name">RESPIRA DNA</div>
+          <div class="product-type">Respiratory & Immunity Support · 200ml</div>
+          <ul class="product-features">
+            <li>Bronchial health support formula</li>
+            <li>Immunomodulatory compound matrix</li>
+            <li>Anti-inflammatory respiratory action</li>
+            <li>Mint-infused for bioavailability</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Truvedika CTA -->
+    <div class="reveal" style="text-align:center;margin-top:56px;padding:48px;border:1px solid rgba(201,168,76,0.15);background:rgba(201,168,76,0.03);">
+      <p style="font-family:'Cormorant Garamond',serif;font-size:22px;font-style:italic;color:var(--off-white);margin-bottom:8px;">"Where Ayurvedic Wisdom Meets Modern Science"</p>
+      <p style="font-size:12px;color:var(--gray);letter-spacing:2px;text-transform:uppercase;margin-bottom:28px;">Explore the complete Truvedika range</p>
+      <a href="https://www.truvedika.com" target="_blank" class="btn-primary" style="cursor:pointer;">Visit www.truvedika.com ↗</a>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- FINANCIALS -->
+<section class="financial-section" id="financials">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="section-eyebrow">
+        <div class="section-eyebrow-line"></div>
+        <span>Financial Overview</span>
+      </div>
+      <h2 class="section-title">Financial Performance<br>& <em>Growth Trajectory</em></h2>
+    </div>
+    <div class="financial-disclaimer reveal">
+      <span>⚠</span>
+      <span>The following financial figures are <strong>illustrative projections</strong> based on comparable pharma startup benchmarks. Verified audited financials will be provided to qualified institutional investors under NDA.</span>
+    </div>
+    <div class="financial-kpis">
+      <div class="kpi-box reveal"><div class="kpi-num">₹8.5 Cr</div><div class="kpi-label">FY2025 Est. Revenue (India)</div></div>
+      <div class="kpi-box reveal reveal-delay-1"><div class="kpi-num">₹1.2 Cr</div><div class="kpi-label">EBITDA FY2025 Est.</div></div>
+      <div class="kpi-box highlight reveal reveal-delay-2"><div class="kpi-num">14%</div><div class="kpi-label">EBITDA Margin</div></div>
+      <div class="kpi-box reveal reveal-delay-3"><div class="kpi-num">₹45 Cr</div><div class="kpi-label">Revenue Target FY2027</div></div>
+    </div>
+    <div class="reveal">
+      <div style="font-size:11px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:24px;">Unit Economics & Key Metrics</div>
+      <div class="unit-economics">
+        <div class="ue-row"><span class="ue-label">Average Selling Price (Syrup 100ml)</span><span class="ue-value">₹110–₹160</span></div>
+        <div class="ue-row"><span class="ue-label">Gross Margin Target (Institutional)</span><span class="ue-value">58–65%</span></div>
+        <div class="ue-row"><span class="ue-label">Gross Margin (Retail / D2C)</span><span class="ue-value">72–78%</span></div>
+        <div class="ue-row"><span class="ue-label">Revenue per SKU per Year (Maturity)</span><span class="ue-value">₹4 Cr – ₹6 Cr</span></div>
+        <div class="ue-row"><span class="ue-label">Active SKUs (2025)</span><span class="ue-value">4 (FEBRIVA, TRUPRA, HEPRA, RESPIRA)</span></div>
+        <div class="ue-row"><span class="ue-label">Institutional Sales Cycle</span><span class="ue-value">4–8 Weeks</span></div>
+        <div class="ue-row"><span class="ue-label">Primary Revenue Channels</span><span class="ue-value">Trade, Institutional, D2C, Export</span></div>
+        <div class="ue-row"><span class="ue-label">Export Revenue Target (FY2028)</span><span class="ue-value">30% of Total Revenue</span></div>
+        <div class="ue-row"><span class="ue-label">R&D Investment (Annual)</span><span class="ue-value">12–18% of Revenue</span></div>
+        <div class="ue-row"><span class="ue-label">Trade & Pharmacy Channel</span><span class="ue-value">45% of Revenue</span></div>
+        <div class="ue-row"><span class="ue-label">Institutional & Tender</span><span class="ue-value">20% of Revenue</span></div>
+        <div class="ue-row"><span class="ue-label">D2C & E-Commerce</span><span class="ue-value">20% of Revenue</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- LEADERSHIP -->
+<section class="leadership-section" id="leadership">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="section-eyebrow">
+        <div class="section-eyebrow-line"></div>
+        <span>Leadership Team</span>
+      </div>
+      <h2 class="section-title">Group <em>Leadership</em></h2>
+      <p class="section-desc" style="margin-top:16px;">Experienced executives across pharmaceutical science, technology, finance, and Ayurvedic medicine.</p>
+    </div>
+    <div class="leadership-grid">
+      <div class="leader-card reveal">
+        <div class="leader-avatar avatar-navy">HS</div>
+        <div class="leader-name">Harsh Shah</div>
+        <div class="leader-title">Chairman & Managing Director</div>
+        <div class="leader-company">SCIBEX BIOSCIENCES + Truvedika (Chairman)</div>
+        <p class="leader-bio">Founder and institutional leader. Brings deep expertise in pharmaceutical sciences, strategic governance, and long-term business development across India and global healthcare markets. Architect of SCIBEX's institutional vision.</p>
+      </div>
+      <div class="leader-card reveal reveal-delay-1">
+        <div class="leader-avatar avatar-teal">PS</div>
+        <div class="leader-name">Purvesh Shah</div>
+        <div class="leader-title">Chief Technology Officer</div>
+        <div class="leader-company">SCIBEX BIOSCIENCES Pvt. Ltd.</div>
+        <p class="leader-bio">Leads technology infrastructure, digital transformation, and scientific systems. Responsible for all R&D technology platforms, enterprise architecture, and innovation strategy across pharmaceutical and digital domains.</p>
+      </div>
+      <div class="leader-card reveal reveal-delay-2">
+        <div class="leader-avatar avatar-navy">SS</div>
+        <div class="leader-name">Shubham Sharma</div>
+        <div class="leader-title">Chief Financial Officer</div>
+        <div class="leader-company">SCIBEX BIOSCIENCES + Truvedika</div>
+        <p class="leader-bio">Oversees financial strategy, investor relations, corporate finance, and capital allocation across pharmaceutical and Ayurvedic divisions. Leads institutional fundraising, M&A evaluation, and financial governance frameworks.</p>
+      </div>
+      <div class="leader-card reveal">
+        <div class="leader-avatar avatar-green">HMS</div>
+        <div class="leader-name">Hemant Shah</div>
+        <div class="leader-title">Co-Founder & MD, Truvedika</div>
+        <div class="leader-company">SCIBEX BIOSCIENCES Co-Founder</div>
+        <p class="leader-bio">Co-founder of SCIBEX and Managing Director of Truvedika. Deep expertise in Ayurvedic science, traditional medicine systems, and wellness brand development. Leads all Truvedika product and commercial strategy.</p>
+      </div>
+      <div class="leader-card reveal reveal-delay-1">
+        <div class="leader-avatar avatar-gold">AS</div>
+        <div class="leader-name">Mrs. Asha Shah</div>
+        <div class="leader-title">Co-Founder & Director</div>
+        <div class="leader-company">Truvedika Natural Ayura Company</div>
+        <p class="leader-bio">Co-founder and Director of Truvedika with deep passion for authentic Ayurvedic wellness and traditional knowledge systems. Oversees product quality philosophy and brand authenticity across all Truvedika formulations.</p>
+      </div>
+      <div class="leader-card reveal reveal-delay-2">
+        <div class="leader-avatar avatar-teal">KS</div>
+        <div class="leader-name">Dr. Krishna Shah</div>
+        <div class="leader-title">Chief Ayurvedic Medical Officer</div>
+        <div class="leader-company">Truvedika (CAMO)</div>
+        <p class="leader-bio">Responsible for all clinical formulation decisions, classical text-based product development, and therapeutic protocol design. Ensures authenticity, safety, and clinical relevance of all Truvedika formulations.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ESG -->
+<section class="esg-section" id="esg">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="section-eyebrow">
+        <div class="section-eyebrow-line"></div>
+        <span>ESG & Governance</span>
+      </div>
+      <h2 class="section-title">Institutional-Grade<br><em>Governance Framework</em></h2>
+      <p class="section-desc" style="margin-top:16px;">Structured for institutional transparency, long-term value creation, and sustainable growth. Built not for the quarter — but for the decade.</p>
+    </div>
+    <div class="esg-grid">
+      <div class="esg-card reveal"><div class="esg-icon">🏛</div><h3>Board Governance</h3><p>Independent oversight framework with audit, compliance, and scientific advisory committees ensuring accountability across all SCIBEX group entities.</p></div>
+      <div class="esg-card reveal reveal-delay-1"><div class="esg-icon">📈</div><h3>Growth Strategy</h3><p>Disciplined organic R&D expansion, strategic licensing, branded partnerships, and phased market entry — India → USA → Global corridors.</p></div>
+      <div class="esg-card reveal reveal-delay-2"><div class="esg-icon">🔍</div><h3>Regulatory Transparency</h3><p>Full disclosure framework for GMP, PV reporting, and regulatory status. Audit-ready documentation accessible to qualified institutional investors.</p></div>
+      <div class="esg-card reveal"><div class="esg-icon">💡</div><h3>Intellectual Property</h3><p>Formulation patents, proprietary process development, and technology licensing as core IP value creation and competitive moat for SCIBEX.</p></div>
+      <div class="esg-card reveal reveal-delay-1"><div class="esg-icon">⏳</div><h3>Long-Term Value</h3><p>Compounding value through diversified therapeutic portfolio, regulated market access, and science-led differentiation over a multi-decade institution-building horizon.</p></div>
+      <div class="esg-card reveal reveal-delay-2"><div class="esg-icon">🌱</div><h3>ESG Commitment</h3><p>Responsible manufacturing, equitable access to medicines, biodiversity protection through Truvedika, and transparent governance across all group operations.</p></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <div class="contact-bg"></div>
+  <div class="section-inner">
+    <div class="contact-grid">
+      <div class="reveal">
+        <div class="section-eyebrow" style="margin-bottom:32px;">
+          <div class="section-eyebrow-line"></div>
+          <span>Get In Touch</span>
+        </div>
+        <blockquote class="contact-quote">
+          "We exist to advance the health of people everywhere — through rigorous pharmaceutical science and the timeless wisdom of Ayurveda — one product, one patient, one generation at a time."
+        </blockquote>
+        <div class="contact-attribution">— SCIBEX BIOSCIENCES & Truvedika | GIFT City, Gujarat</div>
+        <div style="margin-top:48px;">
+          <a href="mailto:business@scibexbiosciences.com" class="btn-primary" style="cursor:pointer;">business@scibexbiosciences.com</a>
+        </div>
+      </div>
+      <div class="contact-offices reveal reveal-delay-2">
+        <div class="contact-office">
+          <div class="contact-office-title">🇮🇳 India — Headquarters</div>
+          <p>
+            SCIBEX BIOSCIENCES Pvt. Ltd.<br>
+            GIFT City (Gujarat International Finance Tec-City)<br>
+            Gandhinagar, Gujarat 382 355, India<br><br>
+            <a href="tel:+919974062755">+91 9974062755</a><br>
+            <a href="mailto:business@scibexbiosciences.com">business@scibexbiosciences.com</a><br>
+            <a href="https://www.scibexbiosciences.com" target="_blank">www.scibexbiosciences.com</a>
+          </p>
+        </div>
+        <div class="contact-office">
+          <div class="contact-office-title">🇺🇸 USA — Operations</div>
+          <p>
+            SCIBEX BIOSCIENCES Inc.<br>
+            New Jersey, United States of America<br>
+            (US East Coast Pharmaceutical Corridor)<br><br>
+            <a href="tel:+15512560660">+1 551 256 0660</a><br>
+            Medical Affairs · Regulatory Filings · Partnership Development
+          </p>
+        </div>
+        <div class="contact-office">
+          <div class="contact-office-title">🌿 Truvedika — Ayurvedic Division</div>
+          <p>
+            Under SCIBEX BIOSCIENCES Pvt. Ltd.<br>
+            Products: FEBRIVA · TRUPRA · HEPRA · RESPIRA DNA<br><br>
+            <a href="https://www.truvedika.com" target="_blank" style="color:var(--gold-light);font-weight:600;">www.truvedika.com ↗</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:16px;letter-spacing:3px;color:var(--white);margin-bottom:4px;">SCIBEX BIOSCIENCES</div>
+      <div class="footer-text">© 2025 SCIBEX BIOSCIENCES Pvt. Ltd. All rights reserved. GIFT City, Gandhinagar, Gujarat, India.</div>
+    </div>
+    <div class="footer-links">
+      <a href="#about">About</a>
+      <a href="#rd">R&D</a>
+      <a href="#truvedika">Truvedika</a>
+      <a href="https://www.truvedika.com" target="_blank">truvedika.com ↗</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="footer-conf">Confidential & Proprietary — For Institutional Use</div>
+  </div>
+</footer>
+
+<script>
+  // Custom Cursor
+  const cursor = document.getElementById('cursor');
+  const cursorRing = document.getElementById('cursorRing');
+  let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
+  document.addEventListener('mousemove', e => {
+    mouseX = e.clientX; mouseY = e.clientY;
+    cursor.style.left = mouseX - 4 + 'px';
+    cursor.style.top = mouseY - 4 + 'px';
+  });
+  function animateCursor() {
+    ringX += (mouseX - ringX) * 0.12;
+    ringY += (mouseY - ringY) * 0.12;
+    cursorRing.style.left = ringX - 18 + 'px';
+    cursorRing.style.top = ringY - 18 + 'px';
+    requestAnimationFrame(animateCursor);
+  }
+  animateCursor();
+  document.querySelectorAll('a, button, .th-card, .rd-card, .leader-card').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      cursor.style.transform = 'scale(2.5)';
+      cursorRing.style.transform = 'scale(1.5)';
+      cursorRing.style.borderColor = 'rgba(201,168,76,0.8)';
+    });
+    el.addEventListener('mouseleave', () => {
+      cursor.style.transform = 'scale(1)';
+      cursorRing.style.transform = 'scale(1)';
+      cursorRing.style.borderColor = 'rgba(201,168,76,0.5)';
+    });
+  });
+
+  // Nav scroll
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 40);
+    // Progress bar
+    const pct = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+    document.getElementById('progressBar').style.width = pct + '%';
+  });
+
+  // Scroll reveal
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Particles
+  function createParticles() {
+    const container = document.getElementById('particles');
+    for (let i = 0; i < 40; i++) {
+      const p = document.createElement('div');
+      p.className = 'particle';
+      p.style.left = Math.random() * 100 + '%';
+      p.style.animationDuration = (8 + Math.random() * 12) + 's';
+      p.style.animationDelay = (Math.random() * 10) + 's';
+      p.style.width = p.style.height = (1 + Math.random() * 2) + 'px';
+      container.appendChild(p);
+    }
+  }
+  createParticles();
+
+  // Smooth scroll for nav links
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
+    });
+  });
+
+  // Counter animation
+  function animateCounter(el, target, prefix='', suffix='') {
+    let start = 0;
+    const duration = 1500;
+    const startTime = performance.now();
+    function update(currentTime) {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const current = Math.floor(eased * target);
+      el.textContent = prefix + current + suffix;
+      if (progress < 1) requestAnimationFrame(update);
+      else el.textContent = prefix + target + suffix;
+    }
+    requestAnimationFrame(update);
+  }
+</script>
+</body>
+</html>
