@@ -1,0 +1,82 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-fraunces: "Fraunces", Georgia, "Times New Roman", serif;
+  --font-outfit: "Outfit", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --navy: #0a1f44;
+  --navy-deep: #06132b;
+  --navy-mid: #102a55;
+  --medical: #1466b8;
+  --emerald: #10806a;
+  --gold: #c9a24b;
+  --gold-soft: #e2c987;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #ffffff;
+  color: #0d1b2e;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-fraunces), Georgia, serif;
+  font-weight: 600;
+  line-height: 1.14;
+  letter-spacing: -0.01em;
+}
+
+@layer components {
+  .wrap {
+    @apply max-w-wrap mx-auto px-6 sm:px-8;
+  }
+  .eyebrow {
+    @apply inline-flex items-center gap-2.5 text-xs font-semibold tracking-[0.22em] uppercase text-medical;
+  }
+  .eyebrow::before {
+    content: "";
+    @apply inline-block w-6 h-px bg-gold;
+  }
+  .eyebrow-light {
+    @apply text-gold-soft;
+  }
+  .btn {
+    @apply inline-flex items-center gap-2 px-7 py-3.5 rounded-[3px] font-semibold text-sm tracking-wide cursor-pointer transition-all duration-200;
+  }
+  .btn-gold {
+    @apply bg-gradient-to-r from-gold to-gold-soft text-navy-deep hover:-translate-y-0.5;
+  }
+  .btn-navy {
+    @apply bg-navy text-white hover:-translate-y-0.5 hover:shadow-md;
+  }
+  .btn-ghost {
+    @apply bg-transparent text-white border border-white/40 hover:bg-white/10 hover:border-white;
+  }
+  .btn-ghost-navy {
+    @apply bg-transparent text-navy border border-navy/15 hover:bg-navy hover:text-white;
+  }
+}
+
+/* Decorative grid for dark sections */
+.bg-grid {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 64px 64px;
+  -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, #000, transparent);
+  mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, #000, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
